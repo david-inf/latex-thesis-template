@@ -1,0 +1,126 @@
+% !TeX TS-program = pdflatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = it_IT
+% !TeX root = MyThesis.tex
+
+\documentclass[12pt,a4paper,twoside,openright,fleqn,titlepage]{report}
+% default: 10pt
+% default: letterpaper
+% default: oneside
+% default: openany
+% default: titlepage
+% default: final
+% -------------------------------- %
+% general packages
+% -------------------------------- %
+\usepackage[T1]{fontenc}
+\usepackage{textcomp} % scelta dei font
+\usepackage[utf8]{inputenc} % encoding
+\usepackage[english,italian]{babel}
+\hyphenation{} % hyphen specialized terms
+\usepackage{microtype}
+\usepackage{indentfirst}
+\usepackage[heightrounded,bindingoffset=5mm]{geometry}
+\usepackage{lipsum} % dummy text
+% -------------------------------- %
+% bibliography and index
+% -------------------------------- %
+\usepackage[autostyle,italian=guillemets,babel]{csquotes}
+\usepackage[backend=biber,useprefix,style=ieee,backref,hyperref,defernumbers=true]{biblatex}
+\addbibresource{MyThesisBib.bib}
+% -------------------------------- %
+% maths and numbers
+% -------------------------------- %
+\usepackage{siunitx}
+\sisetup{%
+	output-decimal-marker={,}, group-separator={\,},%
+	round-mode=places%
+}
+% -------------------------------- %
+% floating objects
+% -------------------------------- %
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{flafter}
+%\usepackage{placeins} % \FloatBarrier
+% -------------------------------- %
+% other packages
+% -------------------------------- %
+\usepackage[strict]{changepage}
+\usepackage{relsize} % relsize{}
+\usepackage{pdfpages}
+\usepackage{enumitem}
+\usepackage[italian,nospace]{varioref} % \vref{}
+\usepackage[bottom]{footmisc}
+\interfootnotelinepenalty=10000
+\dimen\footins=2.5cm
+\usepackage{xspace}
+% -------------------------------- %
+% dnthesis
+% -------------------------------- %
+% compacttoc (move page number near toc entry)
+% arscaptions (figure, table and code captions)
+% arscolors (hyperref colors)
+% contnum (continuous floating objects numbering)
+% printing (when it's time to print)
+\usepackage[arscaptions,arscolors,contnum]{dnthesis}
+\input{./mythesis-code.tex}
+% -------------------------------------------------------- %
+% Commands, environments and easy redefinitions
+% -------------------------------------------------------- %
+% Your info
+\newcommand{\myTitle}{Titolo in italiano}
+\newcommand{\myEngTitle}{English title}
+\newcommand{\mySubject}{Thesis type}
+\newcommand{\myName}{Nome Cognome}
+\newcommand{\myRelatore}{Nome Cognome}
+% Miscellaneous
+\newcommand{\omissis}{[\textellipsis\unkern]}
+\newcommand{\eng}[1]{\foreignlanguage{english}{#1}\xspace}
+\newcommand{\engemph}[1]{\eng{\emph{#1}}}
+\newcommand{\SLR}{\engemph{Systematic Literature Review}}
+\newcommand{\slr}{\engemph{systematic literature review}}
+% -------------------------------------------------------- %
+%\usepackage{showframe} % show page frame
+%\usepackage[reals,italian]{layout} % print the page layout, activate the command
+
+\hypersetup{%
+	pdftitle={\myTitle},%
+	pdfauthor={\myName},%
+	pdfsubject={\mySubject},%
+	pdfkeywords={}%
+}
+\begin{document}
+%\layout % first, activate the package
+\frenchspacing
+% ************************************************************************************* %
+% ************************************************************************************* %
+% FRONTMATTER
+% ************************************************************************************* %
+% ************************************************************************************* %
+\pagenumbering{roman}\pagestyle{empty}
+% dedication + abstract
+\input{./FrontBackMatter/retrofrontespizio.tex}\cleardoublepage
+% ------------------------------------------------------------------------------------- %
+\pagenumbering{arabic}\pagestyle{main}
+\input{./FrontBackMatter/ToC.tex}\cleardoublepage
+\pagestyle{nosec}\input{./FrontBackMatter/ringraziamenti.tex}\cleardoublepage\pagestyle{main}\cleardoublepage
+% ************************************************************************************* %
+% ************************************************************************************* %
+% MAINMATTER %
+% ************************************************************************************* %
+% ************************************************************************************* %
+\pagestyle{nosec}\input{./Chapters/intro.tex}\cleardoublepage\pagestyle{main}\cleardoublepage
+\input{./Chapters/chap-name.tex}\cleardoublepage
+\input{./Chapters/concl.tex}\cleardoublepage
+% ************************************************************************************* %
+% ************************************************************************************* %
+% BACKMATTER %
+% ************************************************************************************* %
+% ************************************************************************************* %
+% biblio
+\input{./FrontBackMatter/back.tex}%\cleardoublepage
+\end{document}

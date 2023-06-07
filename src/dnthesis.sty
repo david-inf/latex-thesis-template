@@ -1,0 +1,297 @@
+% ***************************************************
+% dnthesis.sty
+% author: David Nardi
+% ***************************************************
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dnthesis}[2023/03/04 v1.0 Accorgimenti personali]
+
+\RequirePackage{ifthen}
+
+
+% ************************************************************** %
+% Package options
+% ************************************************************** %
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=dn,prefix=dn@}
+
+%\DeclareBoolOption{dtstyle} % attiva il font del package, dtfont
+\DeclareBoolOption{dtchaptoc} % imposta il dtfont per i capitoli in ToC
+\DeclareBoolOption{dtheader} % imposta il dtfont per le testatine
+\DeclareBoolOption{compacttoc} % numeri di pagina a destra e puntini che separano dalla entry, ToC più compatta e leggibile
+\DeclareBoolOption{oldstylenums} % numeri oldstyle
+\DeclareBoolOption{arscaptions} % caption di figure e tabelle come arsclassica
+\DeclareBoolOption{arscolors} % hypersetup color in the arsclassica style
+\DeclareBoolOption{contnum} % continuous numeration of tables, figures, equations, codes
+\DeclareBoolOption{printing} % opzione per quanto si va a stampare la tesi
+
+\ProcessKeyvalOptions{dn}
+
+
+% ************************************************************** %
+% Font stuffs
+% ************************************************************** %
+%\renewcommand{\sfdefault}{iwona}
+\DeclareRobustCommand{\dtfont}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
+\DeclareRobustCommand{\testatina}[1]{\itshape\MakeTextUppercase{#1}}
+
+%\ifthenelse{\boolean{dn@dtstyle}}%
+%{% activate dtfont and testatina
+%	\PackageInfo{dnthesis}{<dtfont> activated.\MessageBreak
+%	you can use <dtchaptoc> and <dtsheader> options.}
+%	%\DeclareRobustCommand{\dtfont}[1]{\sffamily\textls[80]{\scshape\MakeTextLowercase{#1}}}%
+%	%	\DeclareRobustCommand{\dtfont}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}%
+%	%	\renewcommand\sfdefault{lmssq}
+%	\DeclareRobustCommand{\dtfont}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}%
+%	\DeclareRobustCommand{\testatina}[1]{\itshape\MakeTextUppercase{#1}}%
+%}{% default, activate testatina
+%	\PackageInfo{dnthesis}{default font in ToC and headers.}%
+%	\DeclareRobustCommand{\testatina}[1]{\itshape\MakeTextUppercase{#1}}%
+%}
+
+\RequirePackage{lmodern}
+\ifthenelse{\boolean{dn@oldstylenums}}{\RequirePackage{cfr-lm}}{\relax}
+
+\RequirePackage{microtype}
+
+
+% ************************************************************** %
+% TikZ and colors
+% ************************************************************** %
+\RequirePackage{tikz}
+
+% Plots colororder - MATLAB
+%\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100} % azzurro
+%\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800} % arancione
+%\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500} % giallo
+%\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600} % viola
+%\definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800} % verde
+%\definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300} % celeste
+%\definecolor{mycolor7}{rgb}{0.63500,0.07800,0.18400} % rosso
+
+% ClassicThesis colors
+%\definecolor{Maroon}{cmyk}{0, 0.87, 0.68, 0.32}
+\definecolor{RoyalBlue}{cmyk}{1,0.50,0,0}
+%\definecolor{halfgray}{gray}{0.55}
+\definecolor{webgreen}{rgb}{0,0.5,0}
+\definecolor{webbrown}{rgb}{0.6,0,0}
+
+
+% ************************************************************** %
+% ToC
+% ************************************************************** %
+\RequirePackage{subfig}
+\PassOptionsToPackage{titles,subfigure}{tocloft}
+%\PassOptionsToPackage{titles}{tocloft}
+\RequirePackage{tocloft}
+\RequirePackage{titleps}
+%\PassOptionsToPackage{pagestyles}{titlesec}
+%\RequirePackage{titlesec}
+\RequirePackage{textcase}
+\RequirePackage{emptypage}
+
+\ifthenelse{\boolean{dn@compacttoc}}%
+{%
+	% avoid page numbers being right-aligned in fixed-size box
+	\newlength{\newnumberwidth}%
+	\settowidth{\newnumberwidth}{999} % yields overfull hbox warnings for pages > 999
+	\cftsetpnumwidth{\newnumberwidth}%
+}{\relax}
+
+%\ifthenelse{\boolean{dn@dtchaptoc}\AND\NOT\boolean{dn@dtstyle}}%
+%{\PackageError{dnthesis}{Load first <dtstyle>}}{\relax}
+\ifthenelse{\boolean{dn@dtchaptoc}}{\PackageInfo{dnthesis}{Using dtfont in ToC}}{\relax}
+
+\ifthenelse{\boolean{dn@compacttoc}}{\setcounter{tocdepth}{1}}{\relax}
+%% CHAPTERS
+\ifthenelse{\boolean{dn@dtchaptoc}}%
+{%
+	\renewcommand{\cftchappresnum}{\dtfont}%
+	\renewcommand{\cftchapaftersnumb}{\dtfont}%
+	\renewcommand{\cftchapfont}{\dtfont}%
+	\renewcommand{\cftchappagefont}{\normalfont}%
+}{\relax}
+\ifthenelse{\boolean{dn@compacttoc}}%
+{%
+	\renewcommand{\cftchapleader}{\hspace{1.5em}}%
+	\renewcommand{\cftchapafterpnum}{\cftparfillskip}%
+}{\relax}%
+
+%% SECTIONS
+\ifthenelse{\boolean{dn@dtchaptoc}}%
+{%
+	\renewcommand{\cftsecpresnum}{\scshape\MakeTextLowercase}%
+	\renewcommand{\cftsecfont}{\normalfont}%
+	\renewcommand{\cftsecpagefont}{\normalfont}%
+}{\relax}
+\ifthenelse{\boolean{dn@compacttoc}}%
+{%
+	\renewcommand{\cftsecleader}{\hspace{1.5em}}%
+	\renewcommand{\cftsecafterpnum}{\cftparfillskip}%
+}{\relax}%
+
+%% SUBSECTIONS
+\ifthenelse{\boolean{dn@dtchaptoc}}%
+{%
+	\renewcommand{\cftsubsecpresnum}{\scshape\MakeTextLowercase}%
+	\renewcommand{\cftsubsecfont}{\normalfont}%
+}{\relax}
+\ifthenelse{\boolean{dn@compacttoc}}%
+{%
+	\renewcommand{\cftsubsecleader}{\hspace{1.5em}}%
+	\renewcommand{\cftsubsecafterpnum}{\cftparfillskip}%
+}{\relax}%
+
+%% OTHER
+\ifthenelse{\boolean{dn@compacttoc}}%
+{%
+	\AtBeginDocument{\addtocontents{toc}{\protect\vspace{-\cftbeforechapskip}}}%
+}{\relax}
+
+%% TABLES, FIGURES and CODES
+\RequirePackage{listings}
+\ifthenelse{\boolean{dn@contnum}}%
+{% numerazione continua
+	\PackageInfo{dnthesis}{Continuous numbering of\MessageBreak tables, figures and equations}
+%	\renewcommand{\thetable}{\arabic{table}}%
+%	\renewcommand{\thefigure}{\arabic{figure}}%
+%	\renewcommand{\theequation}{\arabic{equation}}%
+	\RequirePackage{chngcntr}
+	\counterwithout{figure}{chapter}
+	\counterwithout{table}{chapter}
+	\lstset{numberbychapter=false}%
+}{\relax}
+\ifthenelse{\boolean{dn@compacttoc}}%
+{%
+	% LoF
+	\renewcommand{\cftfigleader}{\hspace{1.5em}}%
+	\renewcommand{\cftfigafterpnum}{\cftparfillskip}%
+	% LoT
+	\renewcommand{\cfttableader}{\hspace{1.5em}}%
+	\renewcommand{\cfttabafterpnum}{\cftparfillskip}%
+}{\relax}
+
+\renewcommand{\cftfigpresnum}{\figurename~}%Fig.~}
+\newlength{\figurelabelwidth}%
+\settowidth{\figurelabelwidth}{\cftfigpresnum~999}%
+\addtolength{\figurelabelwidth}{2.5em}%
+\cftsetindents{figure}{0em}{\figurelabelwidth}%
+\renewcommand{\cfttabpresnum}{\tablename~}%Tab.~}
+\newlength{\tablelabelwidth}%
+\settowidth{\tablelabelwidth}{\cfttabpresnum~999}%
+\addtolength{\tablelabelwidth}{2.5em}%
+\cftsetindents{table}{0em}{\tablelabelwidth}%
+\AtBeginDocument{\addtocontents{toc}{\protect\vspace{-\cftbeforechapskip}}}%
+
+
+% ************************************************************** %
+% Page styles
+% ************************************************************** %
+%\ifthenelse{\boolean{dn@dtheader}\AND\NOT\boolean{dn@dnstyle}}%
+%{\PackageError{dnthesis}{Load first <dnstyle>}}{\relax}
+\ifthenelse{\boolean{dn@dtheader}}{\PackageInfo{dnthesis}{Using dtfont in headers}}{\relax}
+
+\ifthenelse{\boolean{dn@dtheader}}%
+{% use dtfont
+	\makeatletter%
+	\if@twoside% true -> twoside
+		\newpagestyle{main}{% twoside mainmatter
+			\sethead[\thepage][][\dtfont{\chaptertitle}]%
+			{\thesection. \dtfont{\sectiontitle}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+		\newpagestyle{nosec}{% deal with unnnumbered and without sections chapters
+			\sethead[\thepage][][\dtfont{\chaptertitle}]%
+			{\dtfont{\chaptertitle}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+		\newpagestyle{biblio}{% to deal with sectioned bibliography
+			\sethead[\thepage][][\dtfont{\bibname}]%
+			{\dtfont{\bibname}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+	\else% false -> oneside
+		\newpagestyle{main}[]{% oneside mainmatter and backmatter
+			\sethead[][][]%
+			{\dtfont{\chaptertitle}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+		\newpagestyle{nosec}[]{% deal with unnnumbered and without sections chapters
+			\sethead[][][]%
+			{\dtfont{\chaptertitle}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+		\newpagestyle{biblio}[]{% bibliography page style
+			\sethead[][][]%
+			{\dtfont{\bibname}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+	\fi%  
+	\makeatother%
+}%
+{% use deafult font
+	\makeatletter%
+	\if@twoside% true -> twoside
+		\newpagestyle{main}{% twoside mainmatter and backmatter
+			\sethead[\thepage][][\testatina{\chaptertitle}]%
+			{\thesection. \testatina{\sectiontitle}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+		\newpagestyle{nosec}{% deal with unnnumbered and without sections chapters
+			\sethead[\thepage][][\testatina{\chaptertitle}]%
+			{\testatina{\chaptertitle}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+		\newpagestyle{biblio}{% bibliography page style
+			\sethead[\thepage][][\testatina{\bibname}]%
+			{\testatina{\bibname}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+	\else% false -> oneside
+		\newpagestyle{main}[]{% oneside mainmatter and backmatter
+			\sethead[][][]%
+			{\testatina{\chaptertitle}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+		\newpagestyle{nosec}[]{% deal with unnnumbered and without sections chapters
+			\sethead[][][]%
+			{\testatina{\chaptertitle}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+		\newpagestyle{biblio}[]{% bibliography page style
+			\sethead[][][]%
+			{\testatina{\bibname}}{}{\thepage}%
+			\setfoot[][][]{}{}{}}%
+	\fi%  
+	\makeatother%
+}
+
+
+% ************************************************************** %
+% Dealing with unnumbered chapters
+% ************************************************************** %
+\newcommand{\inToc}[1]%
+	{\addcontentsline{toc}{chapter}{\texorpdfstring{\protect\numberline{}#1}{#1}}}
+
+
+% ************************************************************** %
+% Captions
+% ************************************************************** %
+\ifthenelse{\boolean{dn@arscaptions}}%
+{%
+	\RequirePackage{caption}%
+	\captionsetup{format=hang,labelsep=colon,font={small,rm},labelfont={sf,bf}}%
+	\captionsetup[table]{skip=0.2\medskipamount,position=top}%
+	\captionsetup[figure]{position=bottom}%
+	%\captionsetup[lstlisting]{}%
+}{\relax}
+
+
+% ************************************************************** %
+% Hyperref
+% ************************************************************** %
+\RequirePackage{hyperref}
+\ifthenelse{\boolean{dn@arscolors}}%
+	{\hypersetup{urlcolor=webbrown,linkcolor=RoyalBlue,citecolor=webgreen}}{\relax}
+\ifthenelse{\boolean{dn@printing}}%
+{% per stampa della tesi
+\hypersetup{%
+	colorlinks,%
+	urlcolor=black,linkcolor=black,citecolor=black,%
+	linktocpage,pdfstartpage=1,bookmarksnumbered,bookmarksopen,bookmarksopenlevel=1,%
+	pdfcreator={pdfLaTeX},pdfproducer={LaTeX con hyperref e DNthesis}}%
+}%
+{% per stampa in PDF
+\hypersetup{%
+	colorlinks,%
+	linktocpage,pdfstartpage=1,bookmarksnumbered,bookmarksopen,bookmarksopenlevel=1,%
+	pdfcreator={pdfLaTeX},pdfproducer={LaTeX con hyperref e DNthesis}}%
+}
