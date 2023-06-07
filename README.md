@@ -3,6 +3,49 @@
 
 # How to
 
+## Chapters and other levels
+```
+\chapter{}\label{ch:}
+\section{}\label{sc:}
+\subsection{}\label{subsc:}
+\subsubsection{}
+\paragraph{}
+```
+
+## Lists
+Bullet points
+```
+\begin{itemize}
+\item
+\begin{itemize}
+\item
+\item
+\end{itemize}
+\item
+\item
+\end{itemize}
+```
+Now numbered
+```
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item
+\item
+\end{enumerate}
+\item
+\item
+\end{enumerate}
+```
+Description of some things
+```
+\begin{description}
+\item
+\item
+\item
+\end{description}
+```
+
 ## Floating objects
 ### Figures
 Just one graphic
@@ -46,3 +89,5 @@ Simple two column table
 \end{tabular}
 \end{table}
 ```
+
+## Bibliography
