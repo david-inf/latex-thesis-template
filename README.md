@@ -82,9 +82,9 @@ Simple two column table
 \label{tab:}
 \begin{tabular}{ll}
 \toprule
-& \\
+ & \\
 \midrule
-& \\
+ & \\
 \bottomrule
 \end{tabular}
 \end{table}
