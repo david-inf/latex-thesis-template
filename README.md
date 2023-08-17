@@ -16,33 +16,33 @@
 Bullet points
 ```
 \begin{itemize}
-\item
+\item text;
 \begin{itemize}
-\item
-\item
+\item text;
+\item text.
 \end{itemize}
-\item
-\item
+\item text;
+\item text.
 \end{itemize}
 ```
 Now numbered
 ```
 \begin{enumerate}
-\item
+\item text;
 \begin{enumerate}
-\item
-\item
+\item text;
+\item text.
 \end{enumerate}
-\item
-\item
+\item text;
+\item text.
 \end{enumerate}
 ```
 Description of some things
 ```
 \begin{description}
-\item
-\item
-\item
+\item[First item] text.
+\item[Second item] text.
+\item[Third item] text.
 \end{description}
 ```
 
@@ -91,3 +91,10 @@ Simple two column table
 ```
 
 ## Bibliography
+Useful commands
+```
+\cite{bibid}
+\textcite{bibid}
+\citeauthor{bibid}
+\citeyear{bibid}
+```
