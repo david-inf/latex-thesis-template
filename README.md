@@ -1,8 +1,7 @@
 # latex-thesis-template
 A LaTeX template for a bachelor thesis
 
-## Document structure
-
+### Document structure
 - [ ] Frontespizio
 - [x] Dedica
 - [x] Sommario
@@ -15,9 +14,9 @@ A LaTeX template for a bachelor thesis
 - [x] Bibliografia
 - [ ] Indice analitico
 
-# How to
+## How to
 
-## Chapters and other levels
+### Chapters and other levels
 ```
 \chapter{}\label{ch:}
 \section{}\label{sc:}
@@ -26,7 +25,7 @@ A LaTeX template for a bachelor thesis
 \paragraph{}
 ```
 
-## Lists
+### Lists
 Bullet points
 ```
 \begin{itemize}
@@ -60,8 +59,8 @@ Description of some things
 \end{description}
 ```
 
-## Floating objects
-### Figures
+### Floating objects
+#### Figures
 Just one graphic
 ```
 \begin{figure}
@@ -88,7 +87,7 @@ Multiple (four here) graphics
 \end{figure}
 ```
 
-### Tables
+#### Tables
 Simple two column table
 ```
 \begin{table}
@@ -104,7 +103,7 @@ Simple two column table
 \end{table}
 ```
 
-## Bibliography
+### Bibliography
 Useful commands
 ```
 \cite{bibid}
