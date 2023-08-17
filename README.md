@@ -1,5 +1,19 @@
 # latex-thesis-template
- A LaTeX template for a bachelor thesis
+A LaTeX template for a bachelor thesis
+
+## Document structure
+
+- [ ] Frontespizio
+- [x] Dedica
+- [x] Sommario
+- [x] Indice generale
+- [x] Ringraziamenti
+- [x] Introduzione
+- [x] Capitoli centrali
+- [x] Conclusioni
+- [ ] Appendici
+- [x] Bibliografia
+- [ ] Indice analitico
 
 # How to
 
