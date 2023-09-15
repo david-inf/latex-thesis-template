@@ -39,11 +39,11 @@ Utilizzare solo in caso di necessità il grassetto `\textbf{text}`, quando si vu
 
 ### Capitoli e livelli inferiori
 ```
-\chapter{}\label{ch:}
-\section{}\label{sc:}
-\subsection{}\label{subsc:}
-\subsubsection{}
-\paragraph{}
+\chapter{Chapter name}\label{ch:}
+\section{Section name}\label{sc:}
+\subsection{Subsection name}\label{subsc:}
+\subsubsection{Subsubsection name}
+\paragraph{Paragraph name}
 ```
 
 ### Riferimenti incrociati
@@ -89,7 +89,7 @@ Una sola figura
 ```
 \begin{figure}
 \centering
-\includegraphics[]{}
+\includegraphics[key=val]{path}
 \caption{caption}
 \label{fig:}
 \end{figure}
@@ -98,19 +98,19 @@ Quattro figure
 ```
 \begin{figure}
 \centering
-\subfloat[]{\emph{}]
- {\includegraphics[]{}} \quad
-\subfloat[]{\emph{}]
- {\includegraphics[]{}} \\
-\subfloat[]{\emph{}]
- {\includegraphics[]{}} \quad
-\subfloat[]{\emph{}]
- {\includegraphics[]{}}
-\caption{}
+\subfloat[]{\emph{label}]
+ {\includegraphics[key=val]{path}} \quad
+\subfloat[]{\emph{label}]
+ {\includegraphics[key=val]{path}} \\
+\subfloat[]{\emph{label}]
+ {\includegraphics[key=val]{path}} \quad
+\subfloat[]{\emph{label}]
+ {\includegraphics[key=val]{path}}
+\caption{caption}
 \label{fig:}
 \end{figure}
 ```
-Per modificare le dimensioni di una figura si agisce su tre parametri chiave-valore `\includegraphics[width=val,height=val,scale=val]{}`, si consiglia di utilizzare soltanto uno dei tre possibili:
+L'argomento obbligatorio di `\includegraphics{path}` deve contenere il percorso della figura che si vuole inserire, si consiglia di utilizzare la cartella Figures per contenerle. Per modificare le dimensioni di una figura si agisce su tre parametri chiave-valore nell'argomento opzionale del comando `\includegraphics[width=val,height=val,scale=val]{path}`, si consiglia di utilizzare soltanto uno dei tre possibili:
 - larghezza: per comodità si definisce relativamente alla larghezza del testo `width=0.7\textwidth` in questo caso il 70%
 - altezza: per comodità si può definire relativamente alla larghezza del testo `height=0.3\textwidth`
 - fattore di scala: si aumentano o si riducono le dimensioni attraverso un fattore `scale=0.5` riduce le dimensioni del 50%
@@ -121,7 +121,7 @@ Nelle tabelle la didascalia e il rispettivo label si trovano sopra. I tipi di co
 Tabella con due colonne
 ```
 \begin{table}
-\caption{}
+\caption{caption}
 \label{tab:}
 \begin{tabular}{ll}
 \toprule
@@ -135,8 +135,8 @@ Tabella con due colonne
 Tabella con due colonne a larghezza prefissata, il tipo di colonna `X` calcola automaticamente la larghezza della stessa e si usa quando nella colonna le celle contengono testo che non sia un'unica parola. Per comodità la larghezza della tabella si definisce relativamente alla larghezza del testo della pagina. `0.5\textwidth` significa che la larghezza della tabella è metà di quella della gabbia del testo.
 ```
 \begin{table}
-\caption{}
-\label{}
+\caption{caption}
+\label{tab:}
 \begin{tabularx}{\textwidth}{lX}
 \toprule
  & \\
@@ -148,9 +148,9 @@ Tabella con due colonne a larghezza prefissata, il tipo di colonna `X` calcola a
 ```
 
 ### Bibliografia
-Il file `MyThesis.bib` è il database bibliografico nel quale inserire le citazioni.
+Il file `MyThesis.bib` è il database bibliografico nel quale inserire le citazioni, ognuna con il relativo id univoco.
 
-Comandi utili per le citazioni all'interno del testo
+Comandi utili per le citazioni all'interno del testo, `bibid` è identifica ciascuna citazione
 ```
 \cite{bibid}
 \textcite{bibid}
