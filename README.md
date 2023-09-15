@@ -110,7 +110,9 @@ Quattro figure
 \label{fig:}
 \end{figure}
 ```
-L'argomento obbligatorio di `\includegraphics{path}` deve contenere il percorso della figura che si vuole inserire, si consiglia di utilizzare la cartella Figures per contenerle. Per modificare le dimensioni di una figura si agisce su tre parametri chiave-valore nell'argomento opzionale del comando `\includegraphics[width=val,height=val,scale=val]{path}`, si consiglia di utilizzare soltanto uno dei tre possibili:
+L'argomento obbligatorio di `\includegraphics{path}` deve contenere il percorso della figura che si vuole inserire, si consiglia di utilizzare la cartella Figures per contenerle. Lo spazio orizzontale può essere variato sostituendo `\,` a `\quad` per uno spazio minore, oppure `\qquad` per uno spazio maggiore. Per quanto riguarda lo spazio verticale, può essere variato tramite l'argomento opzionale di `\\[length]`.
+
+Per modificare le dimensioni di una figura si agisce su tre parametri chiave-valore nell'argomento opzionale del comando `\includegraphics[width=val,height=val,scale=val]{path}`, si consiglia di scegliere tra uno dei possibili:
 - larghezza: per comodità si definisce relativamente alla larghezza del testo `width=0.7\textwidth` in questo caso il 70%
 - altezza: per comodità si può definire relativamente alla larghezza del testo `height=0.3\textwidth`
 - fattore di scala: si aumentano o si riducono le dimensioni attraverso un fattore `scale=0.5` riduce le dimensioni del 50%
