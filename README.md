@@ -37,6 +37,8 @@ Le virgolette si inseriscono con le seguenti ` ''testo`` `.
 
 Utilizzare solo in caso di necessità il grassetto `\textbf{text}`, quando si vuole evidenziare un parola si ricorre al corsivo tramite `\emph{text}`. Parole non nella lingua del documento (Italiano) devono essere scritte in corsivo, usare `\engemph{text}` per parole in lingua Inglese. Il comando `\omissis` stampa il simbolo di omissione di una parte del testo quando si cita.
 
+Per generare del testo fittizio usare `\lipsum`, per averne meno `\lipsum[1]` oppure `\lipsum[1-3]` ecc.
+
 ### Capitoli e livelli inferiori
 ```
 \chapter{Chapter name}\label{ch:}
@@ -150,7 +152,7 @@ Tabella con due colonne a larghezza prefissata, il tipo di colonna `X` calcola a
 ```
 
 ### Bibliografia
-Il file `MyThesis.bib` è il database bibliografico nel quale inserire le citazioni, ognuna con il relativo id univoco.
+Il file `MyThesis.bib` è il database bibliografico nel quale inserire le citazioni, ognuna con il relativo id univoco. Lo stile di citazione impostato è IEEE, schema di citazione e bibliografica numerici. Un altro stile possibile è autore-anno secondo lo stile Chicago, andare nel preamble del file principale per saperne di più.
 
 Comandi utili per le citazioni all'interno del testo, `bibid` è identifica ciascuna citazione
 ```
