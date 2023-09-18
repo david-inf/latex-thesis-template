@@ -161,3 +161,4 @@ Comandi utili per le citazioni all'interno del testo, `bibid` è identifica cias
 \citeauthor{bibid}
 \citeyear{bibid}
 ```
+Esempio `come dimostrato da~\textcite{bibid} ecc`.
