@@ -100,15 +100,15 @@ Quattro figure
 ```
 \begin{figure}
 \centering
-\subfloat[]{\emph{label}]
+\subfloat[][\emph{subcaption}\label{subfig:}]
  {\includegraphics[key=val]{path}} \quad
-\subfloat[]{\emph{label}]
+\subfloat[][\emph{subcaption}\label{subfig:}]
  {\includegraphics[key=val]{path}} \\
-\subfloat[]{\emph{label}]
+\subfloat[][\emph{subcaption}\label{subfig:}]
  {\includegraphics[key=val]{path}} \quad
-\subfloat[]{\emph{label}]
+\subfloat[][\emph{subcaption}\label{subfig:}]
  {\includegraphics[key=val]{path}}
-\caption{caption}
+\caption{maincaption}
 \label{fig:}
 \end{figure}
 ```
