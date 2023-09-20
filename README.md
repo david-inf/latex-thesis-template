@@ -11,10 +11,12 @@ FRONTMATTER
 - [x] Sommario
 - [x] Indice generale
 - [x] Ringraziamenti
+
 MAINMATTER
 - [x] Introduzione numerata
 - [x] Capitoli centrali
 - [x] Conclusioni
+
 BACKMATTER
 - [ ] Appendici
 - [x] Bibliografia
