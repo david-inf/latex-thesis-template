@@ -10,6 +10,8 @@ FRONTMATTER
 - [x] Dedica
 - [x] Sommario
 - [x] Indice generale
+- [x] Elenco delle figure
+- [x] Elenco delle tabelle
 - [x] Ringraziamenti
 
 MAINMATTER
