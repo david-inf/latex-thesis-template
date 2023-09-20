@@ -1,26 +1,45 @@
 # latex-thesis-template
 A LaTeX template for a bachelor thesis
 
-## Struttura del documento
+## How to
+Il file principale è `MyThesis.tex`, all'interno di questo si devono convogliare tutti gli altri `.tex` che si troveranno nella cartella Chapters ed eventualmente FrontBackMatter tramite il comando `\input{path}`, il cui argomento è il percorso per arrivare al file interessato. `\input{./Chapters/chap1.tex` inserisce quanto presente nel file `chap1.tex` della cartella Chapters. All'interno del file principale si ha la struttura del documento riportata di seguito.
+
+### Struttura del documento
 FRONTMATTER
 - [ ] Frontespizio
 - [x] Dedica
 - [x] Sommario
 - [x] Indice generale
+- [x] Elenco delle figure
+- [x] Elenco delle tabelle
 - [x] Ringraziamenti
+
 MAINMATTER
 - [x] Introduzione numerata
 - [x] Capitoli centrali
 - [x] Conclusioni
+
 BACKMATTER
 - [ ] Appendici
 - [x] Bibliografia
 - [ ] Indice analitico
 
-## How to
-Il file principale è `MyThesis.tex`, all'interno di questo si devono convogliare tutti gli altri `.tex` che si troveranno nella cartella Chapters ed eventualmente FrontBackMatter tramite il comando `\input{path}`, il cui argomento è il percorso per arrivare al file interessato. `\input{./Chapters/chap1.tex` inserisce quanto presente nel file `chap1.tex` della cartella Chapters.
-
-All'interno del file principale si ha la struttura del documento precedentemente mostrata.
+Per inserire soltanto l'elenco delle figure usare il seguente codice presente nel file `ToC.tex`
+```
+\cleardoublepage
+\begingroup
+\renewcommand*{\addvspace}[1]{} % looks better
+% ---------- List of Figures ------------
+\pdfbookmark{\listfigurename}{listoffigures} % place the bookmark
+\listoffigures % print the LoF
+% ---------- List of Tables -------------
+%\cleardoublepage % if there's LoF behind
+%\pdfbookmark{\listtablename}{listoftables} % place the bookmark
+%\listoftables % print the LoT
+% ---------------------------------------
+\endgroup
+```
+Analogamente per inserire soltanto l'elenco delle tabelle; rimuovere tutti i commenti per averli entrambi.
 
 ### Scrittura
 Nel testo, ogni capoverso è automaticamente indentato. Usare i comandi `\smallskip \medskip \bigskip` per dare eventuale spazio tra un capoverso e l'altro. Utilizzare il comando `\noindent` per annullare l'indentatura. Di seguito si dà uno spazio nel secondo capoverso:
@@ -79,11 +98,19 @@ Elenco numerato
 Descrizione
 ```
 \begin{description}
-\item[First item] text.
-\item[Second item] text.
-\item[Third item] text.
+\item[First item] \lipsum[1][1-2].
+\item[Second item] \lipsum[1][3-4].
+\item[Third item] \lipsum[1][5-6].
 \end{description}
 ```
+
+Qualora si volesse ridurre localmente lo spazio verticale tra gli item di un elenco, agire sul parametro `itemsep` e qualora si volesse ridurre ulteriormente dare una valore negativo oppure agire sull'altro parametro `parsep`; per modificare lo spazio che separa gli elementi dell'elenco dal margine sinistro della gabbia di testo usare il parametro `leftmargin`. Con il parametro `label` si modifica il label di ogni elemento
+```
+\begin{itemize}[itemsep=val,parsep=val,leftmargin=val,label=]
+\item text.
+\end{itemize}
+```
+È possibile azzerare lo spazio verticale oltre che tra gli elementi, prima e dopo l'elenco passando il parametro `nosep`. Si possono modificare gli elenchi globalmente ad esempio tramite `\setlist[itemize]{key=val}` nel preamble, per comodità al di sotto del pacchetto `enumitem` usato.
 
 ### Oggetti flottanti
 #### Figure
@@ -96,19 +123,19 @@ Una sola figura
 \label{fig:}
 \end{figure}
 ```
-Quattro figure
+Quattro figure, nel caso se ne volesse 2 o 3 commentare dove non si vogliono avere altre immagini
 ```
 \begin{figure}
 \centering
-\subfloat[]{\emph{label}]
+\subfloat[][\emph{subcaption}\label{subfig:}]
  {\includegraphics[key=val]{path}} \quad
-\subfloat[]{\emph{label}]
+\subfloat[][\emph{subcaption}\label{subfig:}]
  {\includegraphics[key=val]{path}} \\
-\subfloat[]{\emph{label}]
+\subfloat[][\emph{subcaption}\label{subfig:}]
  {\includegraphics[key=val]{path}} \quad
-\subfloat[]{\emph{label}]
+\subfloat[][\emph{subcaption}\label{subfig:}]
  {\includegraphics[key=val]{path}}
-\caption{caption}
+\caption{maincaption}
 \label{fig:}
 \end{figure}
 ```
@@ -129,9 +156,9 @@ Tabella con due colonne
 \label{tab:}
 \begin{tabular}{ll}
 \toprule
- & \\
+intestazione & intestazione \\
 \midrule
- & \\
+testo & testo \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -143,9 +170,9 @@ Tabella con due colonne a larghezza prefissata, il tipo di colonna `X` calcola a
 \label{tab:}
 \begin{tabularx}{\textwidth}{lX}
 \toprule
- & \\
+testo & \lipsum[1-4] \\
 \midrule
- & \\
+testo & \lipsum[1-4] \\
 \bottomrule
 \end{tabularx}
 \end{table}
