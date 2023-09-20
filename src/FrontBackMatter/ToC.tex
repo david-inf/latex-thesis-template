@@ -1,14 +1,18 @@
 \pdfbookmark{\contentsname}{tableofcontents}
 
-\setcounter{tocdepth}{1} % profondità, fino a quale livello arrivare
-\tableofcontents
-%\cleardoublepage
-%\listoffigures
-%\listoftables
-%\begingroup
-%\renewcommand*{\addvspace}[1]{}
-%\pdfbookmark{\listfigurename}{listoffigures}
-%\listoffigures\cleardoublepage
-%\pdfbookmark{\listtablename}{listoftables}
-%\listoftables
-%\endgroup
+% ---------- Table of Contents ----------
+\setcounter{tocdepth}{1} % if 1 -> section; if 2 -> section and subsection
+\tableofcontents % print the ToC and place the bookmark
+% ---------------------------------------
+\cleardoublepage
+\begingroup
+\renewcommand*{\addvspace}[1]{} % looks better
+% ---------- List of Figures ------------
+\pdfbookmark{\listfigurename}{listoffigures} % place the bookmark
+\listoffigures % print the LoF
+% ---------- List of Tables -------------
+\cleardoublepage % if there's LoF behind
+\pdfbookmark{\listtablename}{listoftables} % place the bookmark
+\listoftables % print the LoT
+% ---------------------------------------
+\endgroup
